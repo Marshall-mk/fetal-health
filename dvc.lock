@@ -2,3 +2,81 @@ schema: '2.0'
 stages:
   data_load:
     cmd: python -m stages.data_load
+    deps:
+    - path: stages/data_load.py
+      md5: 78f03424ae8a6587684288fc88b13226
+      size: 485
+    outs:
+    - path: data/raw/fetal_health.csv
+      md5: e9a749d3003a7c2f224c92ce0ffd99df
+      size: 230842
+  data_split:
+    cmd: python -m stages.data_split
+    deps:
+    - path: data/raw/fetal_health.csv
+      md5: e9a749d3003a7c2f224c92ce0ffd99df
+      size: 230842
+    - path: stages/data_split.py
+      md5: 692530f6e0ecfe33c985af181dde5189
+      size: 861
+    outs:
+    - path: data/processed/test.csv
+      md5: d7441309d322e4bc562d128e29c9d5cb
+      size: 46624
+    - path: data/processed/train.csv
+      md5: c645c06ecbc3824984ff12a2c37a4991
+      size: 184705
+  featurize:
+    cmd: python -m stages.featurize
+    deps:
+    - path: data/processed/test.csv
+      md5: d7441309d322e4bc562d128e29c9d5cb
+      size: 46624
+    - path: data/processed/train.csv
+      md5: c645c06ecbc3824984ff12a2c37a4991
+      size: 184705
+    - path: stages/featurize.py
+      md5: e99f7c8777ea0283e0cbc5b3381cc42b
+      size: 1851
+    outs:
+    - path: data/processed/featured_test.csv
+      md5: ad692dc0dcf9c39a974bd9894f1d6a3f
+      size: 111274
+    - path: data/processed/featured_train.csv
+      md5: ad2ab2d5e55720996bb57ceb043fa53f
+      size: 1026412
+  train:
+    cmd: python -m stages.train
+    deps:
+    - path: data/processed/featured_train.csv
+      md5: ad2ab2d5e55720996bb57ceb043fa53f
+      size: 1026412
+    - path: stages/train.py
+      md5: 4c6c2fcb309caa7ec71ed937a0777460
+      size: 1072
+    outs:
+    - path: models/model.joblib
+      md5: 1cb63b2cf5601c0215e9117f82508ad7
+      size: 224524
+  evaluate:
+    cmd: python -m stages.evaluate
+    deps:
+    - path: data/processed/featured_test.csv
+      md5: ad692dc0dcf9c39a974bd9894f1d6a3f
+      size: 111274
+    - path: models/model.joblib
+      md5: 1cb63b2cf5601c0215e9117f82508ad7
+      size: 224524
+    - path: stages/evaluate.py
+      md5: b29dc9753b2cc425e6194d761793e5b3
+      size: 2883
+    outs:
+    - path: reports/confusion_matrix.png
+      md5: ebfbc727133b104921c2406e5cced283
+      size: 29906
+    - path: reports/confusion_matrix_data.csv
+      md5: 330991b58c636ed970bc961bda9b78c7
+      size: 6898
+    - path: reports/metrics.json
+      md5: 7c09646d920cf5c25f566a8e2774d369
+      size: 32
