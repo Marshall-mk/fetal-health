@@ -50,7 +50,7 @@ def model(df: pd.DataFrame, target_column: Text,
     estimator = estimators[estimator_name]()
     f1_scorer = make_scorer(f1_score, average='weighted')
     clf = GridSearchCV(estimator=estimator,
-                       param_grid=param_grid,
+                       param_grid=dict(param_grid),
                        cv=cv,
                        verbose=1,
                        scoring=f1_scorer)

@@ -1,0 +1,67 @@
+model:
+  cv: 3
+  estimator_name: xgb
+  estimators:
+    knn:
+      param_grid:
+        n_neighbors:
+        - 4
+        - 5
+        weights:
+        - uniform
+        - distance
+        algorithm: auto
+        leaf_size: 30
+        p: 2
+        metric: minkowski
+        metric_params: None
+        n_jobs: None
+    xgb:
+      param_grid:
+        n_estimators:
+        - 20
+        - 30
+    random_forest:
+      param_grid:
+        n_estimators:
+        - 50
+        - 100
+        criterion:
+        - gini
+        - log_loss
+        max_depth: None
+        min_samples_split: 2
+        min_samples_leaf: 1,
+        min_weight_fraction_leaf: 0.0
+        max_features: sqrt
+    decision_tree:
+      param_grid:
+        criterion:
+        - gini
+        - entropy
+        splitter: best
+        max_depth: None
+        min_samples_split: 2
+        min_samples_leaf: 1
+        min_weight_fraction_leaf: 0.0
+        max_features: None
+        random_state: None
+        max_leaf_nodes: None
+        min_impurity_decrease: 0.0
+        class_weight: None
+        ccp_alpha: 0.0
+  model_path: models/model.joblib
+train:
+  random_state: 42
+  ingest: C:/Users/HI/Desktop/.dev/python/Deep learning/Projects/Fetal Health/data/fetal_health.csv
+  dataset_csv: C:/Users/HI/Desktop/.dev/python/Deep learning/Projects/Fetal Health/data/raw/fetal_health.csv
+  test_size: 0.2
+  trainset_path: data/processed/train.csv
+  testset_path: data/processed/test.csv
+  features_train_path: data/processed/featured_train.csv
+  features_test_path: data/processed/featured_test.csv
+  target_column: fetal_health
+  reports_dir: reports
+  metrics_file: metrics.json
+  confusion_matrix_image: confusion_matrix.png
+  confusion_matrix_data: confusion_matrix_data.csv

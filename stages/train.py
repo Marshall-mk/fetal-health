@@ -8,7 +8,7 @@ from typing import Text
 from train.model import model
 
 
-@hydra.main(config_path="./configs", config_name="configs")
+@hydra.main(config_path="../configs", config_name="configs")
 def train_model(cfg: Text) -> None:
     OmegaConf.to_yaml(cfg, resolve=True)
     """Train model.
@@ -23,7 +23,7 @@ def train_model(cfg: Text) -> None:
     train_df = pd.read_csv(cfg.train.features_train_path)
 
     #logger.info('Train model')
-    model = model(
+    history = model(
         df=train_df,
         target_column=cfg.train.target_column,
         estimator_name=estimator_name,
@@ -34,7 +34,7 @@ def train_model(cfg: Text) -> None:
 
     #logger.info('Save model')
     models_path = cfg.model.model_path
-    joblib.dump(model, models_path)
+    joblib.dump(history, models_path)
 
 
 if __name__ == '__main__':

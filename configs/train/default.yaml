@@ -4,17 +4,23 @@ random_state: 42
 
 
 # data_load:
-ingest: 'data/fetal_health.csv'
-dataset_csv: 'data/raw/fetal_health.csv'
+#ingest: '../data/fetal_health.csv'
+ingest: 'C:/Users/HI/Desktop/.dev/python/Deep learning/Projects/Fetal Health/data/fetal_health.csv'
+#dataset_csv: '../data/raw/fetal_health.csv'
+dataset_csv: 'C:/Users/HI/Desktop/.dev/python/Deep learning/Projects/Fetal Health/data/raw/fetal_health.csv'
 
 # data_split:
 test_size: 0.2
-trainset_path: 'data/processed/train.csv'
-testset_path: 'data/processed/test.csv'
+trainset_path: 'C:/Users/HI/Desktop/.dev/python/Deep learning/Projects/Fetal Health/data/processed/train.csv'
+testset_path: 'C:/Users/HI/Desktop/.dev/python/Deep learning/Projects/Fetal Health/data/processed/test.csv'
+#trainset_path: 'data/processed/train.csv'
+#testset_path: 'data/processed/test.csv'
 
 # featurize:
-features_train_path: 'data/processed/featured_train.csv'
-features_test_path: 'data/processed/featured_test.csv'
+features_train_path: 'C:/Users/HI/Desktop/.dev/python/Deep learning/Projects/Fetal Health/data/processed/featured_train.csv'
+features_test_path: 'C:/Users/HI/Desktop/.dev/python/Deep learning/Projects/Fetal Health/data/processed/featured_test.csv'
+#features_train_path: 'data/processed/featured_train.csv'
+#features_test_path: 'data/processed/featured_test.csv'
 target_column: fetal_health
 
 

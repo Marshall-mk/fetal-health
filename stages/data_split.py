@@ -4,7 +4,7 @@ from omegaconf.omegaconf import OmegaConf
 from typing import Text
 from sklearn.model_selection import train_test_split
 
-@hydra.main(config_path="./configs", config_name="configs")
+@hydra.main(config_path="../configs", config_name="configs")
 def data_split(cfg: Text) -> None:
     OmegaConf.to_yaml(cfg, resolve=True)
     """Split dataset into train/test.

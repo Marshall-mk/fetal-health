@@ -1,0 +1,4 @@
+schema: '2.0'
+stages:
+  data_load:
+    cmd: python -m stages.data_load

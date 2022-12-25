@@ -19,7 +19,7 @@ def write_confusion_matrix_data(y_true, predicted, labels, filename):
     cf = pd.DataFrame(list(zip(true_labels, predicted_labels)), columns=["y_true", "predicted"])
     cf.to_csv(filename, index=False)
 
-@hydra.main(config_path="./configs", config_name="configs")
+@hydra.main(config_path="../configs", config_name="configs")
 def evaluate_model(cfg: Text) -> None:
     OmegaConf.to_yaml(cfg, resolve=True)
     """Evaluate model.

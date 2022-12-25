@@ -3,7 +3,7 @@ import pandas as pd
 from omegaconf.omegaconf import OmegaConf
 from typing import Text
 
-@hydra.main(config_path="./configs", config_name="configs")
+@hydra.main(config_path="../configs", config_name="configs")
 def data_load(cfg: Text) -> None:
     OmegaConf.to_yaml(cfg, resolve=True)
     """Load raw data and saves it to path

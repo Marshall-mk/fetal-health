@@ -5,7 +5,7 @@ from typing import Text
 from imblearn.over_sampling import RandomOverSampler
 from sklearn.preprocessing import RobustScaler
 
-@hydra.main(config_path="./configs", config_name="configs")
+@hydra.main(config_path="../configs", config_name="configs")
 def featurize(cfg: Text) -> None:
     OmegaConf.to_yaml(cfg, resolve=True)
     """Create new features.
@@ -30,8 +30,10 @@ def featurize(cfg: Text) -> None:
 
     # Scale train/ test predictors based on training data
     ro_scaler = RobustScaler().fit(x_resampled)
-    x_train_scaled = ro_scaler.transform(x_resampled)
-    x_test_scaled = ro_scaler.transform(x_test)
+    #x_train_scaled = ro_scaler.transform(x_resampled)
+    x_train_scaled = pd.DataFrame(ro_scaler.transform(x_resampled), columns=x_resampled.columns, index=x_resampled.index)
+    #x_test_scaled = ro_scaler.transform(x_test)
+    x_test_scaled = pd.DataFrame(ro_scaler.transform(x_test), columns=x_test.columns, index=x_test.index)
 
     idx = {1:0, 2:1, 3:2}
 
