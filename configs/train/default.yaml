@@ -1,0 +1,27 @@
+# arranged according to pipeline run
+# base:
+random_state: 42
+
+
+# data_load:
+ingest: 'data/fetal_health.csv'
+dataset_csv: 'data/raw/fetal_health.csv'
+
+# data_split:
+test_size: 0.2
+trainset_path: 'data/processed/train.csv'
+testset_path: 'data/processed/test.csv'
+
+# featurize:
+features_train_path: 'data/processed/featured_train.csv'
+features_test_path: 'data/processed/featured_test.csv'
+target_column: fetal_health
+
+
+
+
+# evaluate:
+reports_dir: reports
+metrics_file: 'metrics.json'
+confusion_matrix_image: 'confusion_matrix.png'
+confusion_matrix_data: 'confusion_matrix_data.csv'
