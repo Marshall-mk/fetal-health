@@ -1,3 +1,72 @@
 stages:
   data_load:
     cmd: python -m stages.data_load
+    deps:
+    - stages/data_load.py
+    # params:
+    # - base
+    # - data_load
+    outs:
+    - data/raw/fetal_health.csv
+
+  data_split:
+    cmd: python -m stages.data_split
+    deps:
+    - data/raw/fetal_health.csv
+    - stages/data_split.py
+    # params:
+    # - base
+    # - data_split
+    # - featurize
+    outs:
+    - data/processed/test.csv
+    - data/processed/train.csv
+
+  featurize:
+    cmd: python -m stages.featurize 
+    deps:
+    - data/processed/test.csv
+    - data/processed/train.csv
+    - stages/featurize.py
+    # params:
+    # - base
+    # - data_load
+    # - featurize
+    outs:
+    - data/processed/featured_train.csv
+    - data/processed/featured_test.csv
+
+  train:
+    cmd: python -m stages.train
+    deps:
+    - data/processed/featured_train.csv
+    - stages/train.py
+    # params:
+    # - base
+    # - data_split.trainset_path
+    # - featurize.target_column
+    # - train
+    outs:
+    - models/model.joblib
+
+  evaluate:
+    cmd: python -m stages.evaluate
+    deps:
+    - data/processed/featured_test.csv
+    - models/model.joblib
+    - stages/evaluate.py
+    # params:
+    # - base
+    # - data_split.testset_path
+    # - evaluate
+    # - featurize.target_column
+    outs:
+    - reports/confusion_matrix.png
+    plots:
+    - reports/confusion_matrix_data.csv:
+        template: confusion
+        x: predicted
+        y: y_true
+    metrics:
+    - reports/metrics.json:
+        cache: false

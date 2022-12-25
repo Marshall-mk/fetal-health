@@ -7,7 +7,7 @@ from typing import Text, Dict
 import hydra
 from omegaconf.omegaconf import OmegaConf
 
-from visualize import plot_confusion_matrix
+from stages.visualize import plot_confusion_matrix
 
 def convert_to_labels(indexes, labels):
     return [labels[i] for i in indexes]

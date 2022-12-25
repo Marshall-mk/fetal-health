@@ -27,7 +27,7 @@ target_column: fetal_health
 
 
 # evaluate:
-reports_dir: reports
+reports_dir: 'C:/Users/HI/Desktop/.dev/python/Deep learning/Projects/Fetal Health/reports'
 metrics_file: 'metrics.json'
 confusion_matrix_image: 'confusion_matrix.png'
 confusion_matrix_data: 'confusion_matrix_data.csv'
